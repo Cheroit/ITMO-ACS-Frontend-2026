@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="На кухне: домашние рецепты, понятные шаги приготовления и кулинарные блоги.">
+  <title>Моя кухня — На кухне</title>
+  <link rel="icon" href="assets/images/chef-hat.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="vendor/bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/profile.js" defer></script>
+</head>
+<body data-page="profile">
+
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  <header class="site-header">
+    <nav class="navbar navbar-expand-lg container" aria-label="Главная навигация">
+      <a class="brand" href="index.html" aria-label="На кухне — главная">
+        <span class="brand-mark"><img src="assets/images/chef-hat.svg" width="21" height="21" alt=""></span>
+        <span class="brand-text"><span class="brand-word">на кухне</span><span class="brand-caption">рецепты и истории</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Открыть меню"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="topNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="recipes.html" data-nav="recipes">Рецепты</a></li>
+          <li class="nav-item"><a class="nav-link" href="blogs.html" data-nav="blogs">Блоги</a></li>
+        </ul>
+        <div class="account-links" id="accountLinks"><a href="login.html">Войти</a><a class="btn btn-primary" href="register.html">Присоединиться</a></div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-main container" id="main">
+
+    <section class="profile-head" aria-labelledby="profileName"><span class="avatar profile-avatar" id="profileAvatar"></span><div><span class="eyebrow">Моя кухня</span><h1 id="profileName">Личный кабинет</h1><p id="profileEmail"></p><div class="profile-stats"><span>Публикации: <strong id="publicationCount">0</strong></span><span>Сохранено: <strong id="savedCount">0</strong></span><span>Подписки: <strong id="followingCount">0</strong></span></div></div><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#publishModal"><i class="bi bi-plus-lg" aria-hidden="true"></i> Поделиться рецептом</button></section>
+    <div class="nav nav-tabs profile-tabs" id="profileTabs" role="tablist" aria-label="Разделы личного кабинета">
+      <button class="nav-link active" id="savedTab" data-bs-toggle="tab" data-bs-target="#savedPanel" type="button" role="tab" aria-controls="savedPanel" aria-selected="true">Сохранённые рецепты</button>
+      <button class="nav-link" id="publicationsTab" data-bs-toggle="tab" data-bs-target="#publicationsPanel" type="button" role="tab" aria-controls="publicationsPanel" aria-selected="false">Мои публикации</button>
+      <button class="nav-link" id="followingTab" data-bs-toggle="tab" data-bs-target="#followingPanel" type="button" role="tab" aria-controls="followingPanel" aria-selected="false">Подписки</button>
+    </div>
+    <div class="tab-content">
+      <section class="tab-pane fade show active" id="savedPanel" role="tabpanel" aria-labelledby="savedTab"><div class="row g-4" id="savedRecipes"></div><div class="empty-state" id="savedEmpty"><h3>Любимые рецепты будут здесь</h3><p>Сохраняйте интересные блюда с помощью значка закладки.</p><a class="btn btn-primary" href="recipes.html">Найти рецепт</a></div></section>
+      <section class="tab-pane fade" id="publicationsPanel" role="tabpanel" aria-labelledby="publicationsTab"><div class="row g-4" id="myRecipes"></div><div class="empty-state" id="publicationsEmpty"><h3>Поделитесь своим особым рецептом</h3><p>Расскажите, что любите готовить для себя и друзей.</p><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#publishModal">Добавить рецепт</button></div></section>
+      <section class="tab-pane fade" id="followingPanel" role="tabpanel" aria-labelledby="followingTab"><div class="row g-4" id="followingList"></div><div class="empty-state" id="followingEmpty"><h3>Найдите своих кулинаров</h3><p>Подпишитесь на авторов, чьи рецепты вам нравятся.</p><a class="btn btn-primary" href="blogs.html">Знакомиться с кулинарами</a></div></section>
+    </div>
+    <div class="modal fade" id="publishModal" tabindex="-1" aria-labelledby="publishTitle" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
+      <div class="modal-header"><h2 class="modal-title" id="publishTitle">Поделитесь вкусным</h2><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Закрыть форму"></button></div>
+      <form id="publishForm"><div class="modal-body">
+        <div class="mb-3"><label class="form-label" for="publishName">Название рецепта</label><input class="form-control" id="publishName" name="title" placeholder="Например, любимый пирог" required maxlength="80"></div>
+        <div class="row g-3 mb-3"><div class="col-sm-6"><label class="form-label" for="publishType">Тип блюда</label><select class="form-select" id="publishType" name="type"><option>Завтраки</option><option>Основные блюда</option><option>Супы</option><option>Десерты</option></select></div><div class="col-sm-6"><label class="form-label" for="publishDifficulty">Сложность</label><select class="form-select" id="publishDifficulty" name="difficulty"><option>Легко</option><option>Средне</option></select></div></div>
+        <div class="row g-3 mb-3"><div class="col-sm-6"><label class="form-label" for="publishTime">Время, минут</label><input class="form-control" id="publishTime" name="time" type="number" value="30" min="1" max="1440" required></div><div class="col-sm-6"><label class="form-label" for="publishPortions">Количество порций</label><input class="form-control" id="publishPortions" name="portions" type="number" value="2" min="1" max="30" required></div></div>
+        <div class="mb-3"><label class="form-label" for="publishImage">Фото блюда</label><select class="form-select" id="publishImage" name="image"><option value="pasta.jpg">Паста</option><option value="soup.jpg">Суп</option><option value="pizza.jpg">Пицца</option><option value="omelette.jpg">Омлет</option><option value="cupcakes.jpg">Кексы</option><option value="skewers.jpg">Шашлычки</option></select></div>
+        <div class="mb-3"><label class="form-label" for="publishDescription">Короткое описание</label><textarea class="form-control" id="publishDescription" name="description" rows="2" required maxlength="300"></textarea></div>
+        <div class="mb-3"><label class="form-label" for="publishIngredients">Ингредиенты</label><textarea class="form-control" id="publishIngredients" name="ingredients" rows="3" placeholder="Паста — 200 г&#10;Томаты — 300 г" required maxlength="2000" aria-describedby="publishIngredientHint"></textarea><div class="small-note mt-1" id="publishIngredientHint">Каждый ингредиент с новой строки. Количество можно указать после тире —.</div></div>
+        <div class="mb-3"><label class="form-label" for="publishSteps">Шаги приготовления</label><textarea class="form-control" id="publishSteps" name="steps" rows="4" required maxlength="5000" aria-describedby="publishStepHint"></textarea><div class="small-note mt-1" id="publishStepHint">Каждый шаг с новой строки.</div></div>
+        <div class="mb-3"><label class="form-label" for="publishVideo">Ссылка на видеорецепт YouTube</label><input class="form-control" id="publishVideo" name="video" type="url" placeholder="https://www.youtube.com/watch?v=..." required maxlength="300"></div>
+        <p class="alert alert-danger mb-0" id="publishError" role="alert" hidden></p>
+      </div><div class="modal-footer"><button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Отмена</button><button class="btn btn-primary" type="submit">Опубликовать рецепт</button></div></form>
+    </div></div></div>
+
+  </main>
+
+  <footer class="site-footer container">
+    <a class="footer-brand" href="index.html">на кухне</a>
+    <span>Место, где делятся вкусным</span>
+    <span>© 2026</span>
+  </footer>
+  <!-- Общие элементы Bootstrap: приглашение ко входу и уведомление. -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+      <div class="modal-header"><h2 class="modal-title" id="loginModalTitle">Загляните на свою кухню</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button></div>
+      <div class="modal-body"><p class="mb-0">Войдите, чтобы сохранять рецепты, ставить лайки и общаться с кулинарами.</p></div>
+      <div class="modal-footer"><a class="btn btn-outline-primary" href="register.html">Создать аккаунт</a><a class="btn btn-primary" id="loginModalLink" href="login.html">Войти</a></div>
+    </div></div>
+  </div>
+  <div class="notice-container"><div class="toast align-items-center" id="noticeToast" role="status" aria-live="polite" aria-atomic="true" data-bs-delay="3000"><div class="d-flex"><div class="toast-body" id="noticeText"></div><button type="button" class="btn-close me-3 m-auto" data-bs-dismiss="toast" aria-label="Закрыть уведомление"></button></div></div></div>
+
+</body>
+</html>

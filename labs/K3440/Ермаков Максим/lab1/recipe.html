@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="На кухне: домашние рецепты, понятные шаги приготовления и кулинарные блоги.">
+  <title>Рецепт — На кухне</title>
+  <link rel="icon" href="assets/images/chef-hat.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="vendor/bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/recipe.js" defer></script>
+</head>
+<body data-page="recipe">
+
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  <header class="site-header">
+    <nav class="navbar navbar-expand-lg container" aria-label="Главная навигация">
+      <a class="brand" href="index.html" aria-label="На кухне — главная">
+        <span class="brand-mark"><img src="assets/images/chef-hat.svg" width="21" height="21" alt=""></span>
+        <span class="brand-text"><span class="brand-word">на кухне</span><span class="brand-caption">рецепты и истории</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Открыть меню"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="topNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="recipes.html" data-nav="recipes">Рецепты</a></li>
+          <li class="nav-item"><a class="nav-link" href="blogs.html" data-nav="blogs">Блоги</a></li>
+        </ul>
+        <div class="account-links" id="accountLinks"><a href="login.html">Войти</a><a class="btn btn-primary" href="register.html">Присоединиться</a></div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-main container" id="main">
+
+    <a class="back-link" href="recipes.html"><i class="bi bi-arrow-left" aria-hidden="true"></i>К рецептам</a>
+    <div id="recipeNotFound" class="empty-state" hidden><h1>Рецепт не найден</h1><p>Загляните в каталог — там есть другие вкусные идеи.</p><a class="btn btn-primary" href="recipes.html">Открыть рецепты</a></div>
+    <article id="recipeContent">
+      <div class="row g-4 align-items-center recipe-intro">
+        <div class="col-md-6"><span class="eyebrow" id="recipeType"></span><h1 id="recipeTitle"></h1><p id="recipeDescription"></p><div class="recipe-meta"><span><i class="bi bi-clock" aria-hidden="true"></i><span id="recipeTime"></span></span><span><i class="bi bi-bar-chart" aria-hidden="true"></i><span id="recipeDifficulty"></span></span><span><i class="bi bi-people" aria-hidden="true"></i><span data-portions></span></span></div><div class="recipe-actions"><button class="btn btn-primary" type="button" id="saveButton"><i class="bi bi-bookmark" aria-hidden="true"></i> <span>Сохранить рецепт</span></button><button class="btn btn-outline-primary" type="button" id="likeButton" aria-label="Нравится рецепт" aria-pressed="false"><i class="bi bi-heart" aria-hidden="true"></i> <span></span></button></div></div>
+        <div class="col-md-6"><img class="recipe-main-image" id="recipeImage" src="assets/images/pasta.jpg" alt="Паста с томатами"></div>
+      </div>
+      <div class="author-row"><span class="avatar avatar-large" id="authorAvatar"></span><div><h2 id="authorName"></h2><p id="authorAbout"></p></div><button class="btn btn-outline-primary" type="button" id="followButton" aria-pressed="false">Подписаться</button></div>
+      <div class="row g-4 g-lg-5">
+        <aside class="col-lg-4" aria-labelledby="ingredientsTitle"><div class="ingredients-panel"><div class="section-heading mb-3"><h2 id="ingredientsTitle">Ингредиенты</h2><span class="small-note" data-portions></span></div><div id="ingredientList"></div><p class="small-note mt-3 mb-0">Отмечайте то, что уже подготовили.</p></div></aside>
+        <section class="col-lg-8" aria-labelledby="stepsTitle"><h2 id="stepsTitle">Готовим по шагам</h2><ol class="step-list" id="stepList"></ol><h2 class="mb-3">Видеорецепт</h2><div class="ratio ratio-16x9 video-frame"><iframe id="recipeVideo" title="Видео о приготовлении блюда" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><p class="small-note mt-3 mb-2" id="videoAuthor"></p><a class="text-link" id="videoLink" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">Открыть видео на YouTube <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i></a></section>
+      </div>
+      <section class="comments-section" aria-labelledby="commentsTitle"><h2 id="commentsTitle">За столом обсуждают <span class="comment-count" id="commentCount"></span></h2><form class="my-4" id="commentForm"><label class="form-label" for="comment">Ваш комментарий</label><textarea class="form-control mb-3" id="comment" name="comment" rows="3" placeholder="Получилось вкусно? Поделитесь впечатлениями." required maxlength="1000"></textarea><button class="btn btn-primary" type="submit">Отправить</button></form><div id="commentList" aria-live="polite"></div></section>
+    </article>
+
+  </main>
+
+  <footer class="site-footer container">
+    <a class="footer-brand" href="index.html">на кухне</a>
+    <span>Место, где делятся вкусным</span>
+    <span>© 2026</span>
+  </footer>
+  <!-- Общие элементы Bootstrap: приглашение ко входу и уведомление. -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+      <div class="modal-header"><h2 class="modal-title" id="loginModalTitle">Загляните на свою кухню</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button></div>
+      <div class="modal-body"><p class="mb-0">Войдите, чтобы сохранять рецепты, ставить лайки и общаться с кулинарами.</p></div>
+      <div class="modal-footer"><a class="btn btn-outline-primary" href="register.html">Создать аккаунт</a><a class="btn btn-primary" id="loginModalLink" href="login.html">Войти</a></div>
+    </div></div>
+  </div>
+  <div class="notice-container"><div class="toast align-items-center" id="noticeToast" role="status" aria-live="polite" aria-atomic="true" data-bs-delay="3000"><div class="d-flex"><div class="toast-body" id="noticeText"></div><button type="button" class="btn-close me-3 m-auto" data-bs-dismiss="toast" aria-label="Закрыть уведомление"></button></div></div></div>
+
+</body>
+</html>

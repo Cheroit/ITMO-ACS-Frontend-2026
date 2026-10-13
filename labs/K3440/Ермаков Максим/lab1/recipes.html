@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="На кухне: домашние рецепты, понятные шаги приготовления и кулинарные блоги.">
+  <title>Поиск рецептов — На кухне</title>
+  <link rel="icon" href="assets/images/chef-hat.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="vendor/bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/recipes.js" defer></script>
+</head>
+<body data-page="recipes">
+
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  <header class="site-header">
+    <nav class="navbar navbar-expand-lg container" aria-label="Главная навигация">
+      <a class="brand" href="index.html" aria-label="На кухне — главная">
+        <span class="brand-mark"><img src="assets/images/chef-hat.svg" width="21" height="21" alt=""></span>
+        <span class="brand-text"><span class="brand-word">на кухне</span><span class="brand-caption">рецепты и истории</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Открыть меню"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="topNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="recipes.html" data-nav="recipes">Рецепты</a></li>
+          <li class="nav-item"><a class="nav-link" href="blogs.html" data-nav="blogs">Блоги</a></li>
+        </ul>
+        <div class="account-links" id="accountLinks"><a href="login.html">Войти</a><a class="btn btn-primary" href="register.html">Присоединиться</a></div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-main container" id="main">
+
+    <div class="page-heading"><span class="eyebrow">Найдите своё любимое</span><h1>Рецепты на любой день</h1><p>Простые продукты, понятные шаги и немного вдохновения.</p></div>
+    <form id="filterForm">
+      <div class="search-box mb-4" role="search"><i class="bi bi-search" aria-hidden="true"></i><label class="visually-hidden" for="query">Название блюда или ингредиент</label><input class="form-control" id="query" name="query" placeholder="Название блюда или ингредиент" maxlength="100"><button class="btn btn-primary" type="submit">Найти</button></div>
+      <div class="row g-4">
+        <aside class="col-lg-3" aria-labelledby="filterTitle">
+          <div class="filter-panel">
+            <div class="filter-heading"><h2 id="filterTitle">Фильтры</h2><button class="reset-button" type="reset">Сбросить</button></div>
+            <div class="mb-3"><label class="form-label" for="type">Тип блюда</label><select class="form-select" id="type" name="type"><option value="">Все блюда</option><option>Завтраки</option><option>Основные блюда</option><option>Супы</option><option>Десерты</option></select></div>
+            <div class="mb-3"><label class="form-label" for="difficulty">Сложность</label><select class="form-select" id="difficulty" name="difficulty"><option value="">Любая сложность</option><option>Легко</option><option>Средне</option></select></div>
+            <div class="mb-2"><label class="form-label" for="ingredients">Ингредиенты</label><input class="form-control" id="ingredients" name="ingredients" placeholder="Например, томаты" aria-describedby="ingredientHint" maxlength="200"></div>
+            <p class="small-note mb-4" id="ingredientHint">Один или несколько ингредиентов через запятую.</p>
+            <button class="btn btn-primary w-100" type="submit">Показать рецепты</button>
+          </div>
+        </aside>
+        <section class="col-lg-9" aria-label="Найденные рецепты">
+          <div class="result-heading"><span id="resultCount" role="status" aria-live="polite"></span><span class="small-note">Проверенные домашние идеи</span></div>
+          <div class="row g-4" id="recipeList"></div>
+          <div class="empty-state" id="noResults" hidden><h3>Рецептов пока нет</h3><p>Попробуйте изменить запрос или сбросить фильтры.</p><button class="btn btn-outline-primary" type="reset">Сбросить фильтры</button></div>
+        </section>
+      </div>
+    </form>
+
+  </main>
+
+  <footer class="site-footer container">
+    <a class="footer-brand" href="index.html">на кухне</a>
+    <span>Место, где делятся вкусным</span>
+    <span>© 2026</span>
+  </footer>
+  <!-- Общие элементы Bootstrap: приглашение ко входу и уведомление. -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+      <div class="modal-header"><h2 class="modal-title" id="loginModalTitle">Загляните на свою кухню</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button></div>
+      <div class="modal-body"><p class="mb-0">Войдите, чтобы сохранять рецепты, ставить лайки и общаться с кулинарами.</p></div>
+      <div class="modal-footer"><a class="btn btn-outline-primary" href="register.html">Создать аккаунт</a><a class="btn btn-primary" id="loginModalLink" href="login.html">Войти</a></div>
+    </div></div>
+  </div>
+  <div class="notice-container"><div class="toast align-items-center" id="noticeToast" role="status" aria-live="polite" aria-atomic="true" data-bs-delay="3000"><div class="d-flex"><div class="toast-body" id="noticeText"></div><button type="button" class="btn-close me-3 m-auto" data-bs-dismiss="toast" aria-label="Закрыть уведомление"></button></div></div></div>
+
+</body>
+</html>

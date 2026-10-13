@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="На кухне: домашние рецепты, понятные шаги приготовления и кулинарные блоги.">
+  <title>Вход — На кухне</title>
+  <link rel="icon" href="assets/images/chef-hat.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="vendor/bootstrap-icons/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="vendor/bootstrap/bootstrap.bundle.min.js" defer></script>
+  <script src="js/data.js" defer></script>
+  <script src="js/common.js" defer></script>
+  <script src="js/auth.js" defer></script>
+</head>
+<body data-page="login">
+
+  <a class="skip-link" href="#main">Перейти к содержимому</a>
+  <header class="site-header">
+    <nav class="navbar navbar-expand-lg container" aria-label="Главная навигация">
+      <a class="brand" href="index.html" aria-label="На кухне — главная">
+        <span class="brand-mark"><img src="assets/images/chef-hat.svg" width="21" height="21" alt=""></span>
+        <span class="brand-text"><span class="brand-word">на кухне</span><span class="brand-caption">рецепты и истории</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Открыть меню"><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse" id="topNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="recipes.html" data-nav="recipes">Рецепты</a></li>
+          <li class="nav-item"><a class="nav-link" href="blogs.html" data-nav="blogs">Блоги</a></li>
+        </ul>
+        <div class="account-links" id="accountLinks"><a href="login.html">Войти</a><a class="btn btn-primary" href="register.html">Присоединиться</a></div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page-main container" id="main">
+
+    <section class="auth-layout">
+      <aside class="auth-story"><span class="eyebrow">Добро пожаловать домой</span><h2>Любимые рецепты<br>всегда под рукой.</h2><p>Сохраняйте находки, делитесь вкусным<br>и находите тех, кто любит готовить.</p><img src="assets/images/pasta.jpg" alt="Домашняя паста"></aside>
+      <div class="auth-form"><span class="eyebrow">Рады вас видеть</span><h1>С возвращением!</h1><p>Войдите, чтобы заглянуть на свою кухню.</p>
+        <form id="authForm">
+          
+          <div class="mb-3"><label class="form-label" for="email">Электронная почта</label><input class="form-control" id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" maxlength="100" required></div>
+          <div class="mb-3"><label class="form-label" for="password">Пароль</label><input class="form-control" id="password" name="password" type="password" placeholder="Введите пароль" autocomplete="current-password" minlength="6" maxlength="100" required></div>
+          <div class="form-check mb-4"><input class="form-check-input" id="remember" name="remember" type="checkbox"><label class="form-check-label small-note" for="remember">Запомнить меня</label></div>
+          <p class="alert alert-danger" id="authError" role="alert" hidden></p>
+          <button class="btn btn-primary w-100" type="submit">Войти</button>
+        </form>
+        <p class="auth-switch">Ещё нет аккаунта? <a id="authSwitch" href="register.html">Зарегистрироваться</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer container">
+    <a class="footer-brand" href="index.html">на кухне</a>
+    <span>Место, где делятся вкусным</span>
+    <span>© 2026</span>
+  </footer>
+  <!-- Общие элементы Bootstrap: приглашение ко входу и уведомление. -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
+      <div class="modal-header"><h2 class="modal-title" id="loginModalTitle">Загляните на свою кухню</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button></div>
+      <div class="modal-body"><p class="mb-0">Войдите, чтобы сохранять рецепты, ставить лайки и общаться с кулинарами.</p></div>
+      <div class="modal-footer"><a class="btn btn-outline-primary" href="register.html">Создать аккаунт</a><a class="btn btn-primary" id="loginModalLink" href="login.html">Войти</a></div>
+    </div></div>
+  </div>
+  <div class="notice-container"><div class="toast align-items-center" id="noticeToast" role="status" aria-live="polite" aria-atomic="true" data-bs-delay="3000"><div class="d-flex"><div class="toast-body" id="noticeText"></div><button type="button" class="btn-close me-3 m-auto" data-bs-dismiss="toast" aria-label="Закрыть уведомление"></button></div></div></div>
+
+</body>
+</html>
