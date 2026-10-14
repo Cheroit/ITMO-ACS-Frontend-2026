@@ -155,7 +155,10 @@ img { max-width: 100%; }
 .step-list li::before { content: counter(step); position: absolute; left: 0; top: 0; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; background: var(--soft); color: var(--olive); border-radius: 50%; font-size: .85rem; }
 .step-list h3 { margin-bottom: 8px; }
 .step-list p { font-size: .875rem; margin-bottom: 0; }
-.video-frame { border-radius: 14px; overflow: hidden; background: var(--soft); }
+.video-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; min-height: 220px; padding: 30px 22px; border-radius: 14px; background: var(--soft); text-align: center; }
+.video-placeholder > i { font-size: 2rem; color: var(--olive); }
+.video-placeholder h3, .video-placeholder p { margin: 0; }
+.video-placeholder p { font-size: .875rem; }
 .comments-section { max-width: 760px; padding-top: 30px; margin-top: 38px; border-top: 1px solid var(--line); }
 .comment-count { font-family: Arial, sans-serif; color: var(--muted); font-size: 1rem; margin-left: 7px; }
 .comment { display: flex; align-items: flex-start; gap: 13px; padding: 19px 0; border-top: 1px solid var(--line); }

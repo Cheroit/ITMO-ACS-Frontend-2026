@@ -28,12 +28,6 @@ if (!recipe) {
     <label class="ingredient" for="ingredient${index}"><input class="form-check-input" id="ingredient${index}" type="checkbox"><span>${escapeHTML(item[0])}</span><span class="ingredient-amount">${escapeHTML(item[1])}</span></label>`).join('');
   document.getElementById('stepList').innerHTML = recipe.steps.map(item => `<li><h3>${escapeHTML(item[0])}</h3><p>${escapeHTML(item[1])}</p></li>`).join('');
 
-  const video = document.getElementById('recipeVideo');
-  video.src = 'https://www.youtube-nocookie.com/embed/' + recipe.videoId;
-  video.title = 'Видео о приготовлении: ' + recipe.title;
-  document.getElementById('videoLink').href = 'https://www.youtube.com/watch?v=' + recipe.videoId;
-  document.getElementById('videoAuthor').textContent = 'Ещё один способ приготовить это блюдо — от ' + recipe.videoAuthor + '.';
-
   const commentKey = 'nk-comments:' + recipe.id;
   const sampleComments = recipe.id === 'pasta' ? [
     { name: 'Мария Котова', text: 'Приготовила на ужин — очень вкусно! Добавила немного пармезана.', date: '12.10.2026' },

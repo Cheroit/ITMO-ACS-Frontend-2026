@@ -47,9 +47,9 @@
       <section class="tab-pane fade" id="publicationsPanel" role="tabpanel" aria-labelledby="publicationsTab"><div class="row g-4" id="myRecipes"></div><div class="empty-state" id="publicationsEmpty"><h3>Поделитесь своим особым рецептом</h3><p>Расскажите, что любите готовить для себя и друзей.</p><button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#publishModal">Добавить рецепт</button></div></section>
       <section class="tab-pane fade" id="followingPanel" role="tabpanel" aria-labelledby="followingTab"><div class="row g-4" id="followingList"></div><div class="empty-state" id="followingEmpty"><h3>Найдите своих кулинаров</h3><p>Подпишитесь на авторов, чьи рецепты вам нравятся.</p><a class="btn btn-primary" href="blogs.html">Знакомиться с кулинарами</a></div></section>
     </div>
-    <div class="modal fade" id="publishModal" tabindex="-1" aria-labelledby="publishTitle" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
+    <div class="modal fade" id="publishModal" tabindex="-1" aria-labelledby="publishTitle" aria-hidden="true"><div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"><form class="modal-content" id="publishForm">
       <div class="modal-header"><h2 class="modal-title" id="publishTitle">Поделитесь вкусным</h2><button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Закрыть форму"></button></div>
-      <form id="publishForm"><div class="modal-body">
+      <div class="modal-body">
         <div class="mb-3"><label class="form-label" for="publishName">Название рецепта</label><input class="form-control" id="publishName" name="title" placeholder="Например, любимый пирог" required maxlength="80"></div>
         <div class="row g-3 mb-3"><div class="col-sm-6"><label class="form-label" for="publishType">Тип блюда</label><select class="form-select" id="publishType" name="type"><option>Завтраки</option><option>Основные блюда</option><option>Супы</option><option>Десерты</option></select></div><div class="col-sm-6"><label class="form-label" for="publishDifficulty">Сложность</label><select class="form-select" id="publishDifficulty" name="difficulty"><option>Легко</option><option>Средне</option></select></div></div>
         <div class="row g-3 mb-3"><div class="col-sm-6"><label class="form-label" for="publishTime">Время, минут</label><input class="form-control" id="publishTime" name="time" type="number" value="30" min="1" max="1440" required></div><div class="col-sm-6"><label class="form-label" for="publishPortions">Количество порций</label><input class="form-control" id="publishPortions" name="portions" type="number" value="2" min="1" max="30" required></div></div>
@@ -57,10 +57,9 @@
         <div class="mb-3"><label class="form-label" for="publishDescription">Короткое описание</label><textarea class="form-control" id="publishDescription" name="description" rows="2" required maxlength="300"></textarea></div>
         <div class="mb-3"><label class="form-label" for="publishIngredients">Ингредиенты</label><textarea class="form-control" id="publishIngredients" name="ingredients" rows="3" placeholder="Паста — 200 г&#10;Томаты — 300 г" required maxlength="2000" aria-describedby="publishIngredientHint"></textarea><div class="small-note mt-1" id="publishIngredientHint">Каждый ингредиент с новой строки. Количество можно указать после тире —.</div></div>
         <div class="mb-3"><label class="form-label" for="publishSteps">Шаги приготовления</label><textarea class="form-control" id="publishSteps" name="steps" rows="4" required maxlength="5000" aria-describedby="publishStepHint"></textarea><div class="small-note mt-1" id="publishStepHint">Каждый шаг с новой строки.</div></div>
-        <div class="mb-3"><label class="form-label" for="publishVideo">Ссылка на видеорецепт YouTube</label><input class="form-control" id="publishVideo" name="video" type="url" placeholder="https://www.youtube.com/watch?v=..." required maxlength="300"></div>
         <p class="alert alert-danger mb-0" id="publishError" role="alert" hidden></p>
-      </div><div class="modal-footer"><button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Отмена</button><button class="btn btn-primary" type="submit">Опубликовать рецепт</button></div></form>
-    </div></div></div>
+      </div><div class="modal-footer"><button class="btn btn-outline-primary" type="button" data-bs-dismiss="modal">Отмена</button><button class="btn btn-primary" type="submit">Опубликовать рецепт</button></div>
+    </form></div></div>
 
   </main>
 

@@ -34,13 +34,10 @@ if (!currentUser) {
       return [parts[0].trim(), (parts[1] || '').trim()];
     });
     const steps = form.steps.value.trim().split('\n').filter(line => line.trim()).map((line, index) => ['Шаг ' + (index + 1), line.trim()]);
-    const url = new URL(form.video.value);
-    const videoId = url.hostname === 'youtu.be' ? url.pathname.slice(1) : url.searchParams.get('v');
-    const validHost = ['youtu.be', 'www.youtube.com', 'youtube.com'].includes(url.hostname);
     const error = document.getElementById('publishError');
     error.hidden = true;
-    if (!title || !ingredients.length || !steps.length || !validHost || !/^[\w-]{11}$/.test(videoId || '')) {
-      error.textContent = 'Заполните название, ингредиенты, шаги и укажите ссылку на видео YouTube.';
+    if (!title || !ingredients.length || !steps.length) {
+      error.textContent = 'Заполните название, ингредиенты и шаги приготовления.';
       error.hidden = false;
       return;
     }
@@ -48,7 +45,7 @@ if (!currentUser) {
       id: 'recipe-' + Date.now(), title, type: form.type.value, difficulty: form.difficulty.value,
       time: Number(form.time.value), portions: Number(form.portions.value), image: form.image.value,
       description: form.description.value.trim(), authorId: currentUser.email, authorName: currentUser.name,
-      likes: 0, ingredients, steps, videoId, videoAuthor: currentUser.name
+      likes: 0, ingredients, steps
     };
     const publications = readStorage('nk-publications', []);
     publications.push(recipe);

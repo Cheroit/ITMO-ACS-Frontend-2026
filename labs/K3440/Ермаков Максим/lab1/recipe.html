@@ -46,7 +46,16 @@
       <div class="author-row"><span class="avatar avatar-large" id="authorAvatar"></span><div><h2 id="authorName"></h2><p id="authorAbout"></p></div><button class="btn btn-outline-primary" type="button" id="followButton" aria-pressed="false">Подписаться</button></div>
       <div class="row g-4 g-lg-5">
         <aside class="col-lg-4" aria-labelledby="ingredientsTitle"><div class="ingredients-panel"><div class="section-heading mb-3"><h2 id="ingredientsTitle">Ингредиенты</h2><span class="small-note" data-portions></span></div><div id="ingredientList"></div><p class="small-note mt-3 mb-0">Отмечайте то, что уже подготовили.</p></div></aside>
-        <section class="col-lg-8" aria-labelledby="stepsTitle"><h2 id="stepsTitle">Готовим по шагам</h2><ol class="step-list" id="stepList"></ol><h2 class="mb-3">Видеорецепт</h2><div class="ratio ratio-16x9 video-frame"><iframe id="recipeVideo" title="Видео о приготовлении блюда" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><p class="small-note mt-3 mb-2" id="videoAuthor"></p><a class="text-link" id="videoLink" href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">Открыть видео на YouTube <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i></a></section>
+        <section class="col-lg-8" aria-labelledby="stepsTitle">
+          <h2 id="stepsTitle">Готовим по шагам</h2>
+          <ol class="step-list" id="stepList"></ol>
+          <h2 class="mb-3">Видеорецепт</h2>
+          <div class="video-placeholder" role="note">
+            <i class="bi bi-camera-video" aria-hidden="true"></i>
+            <h3>Видео будет добавлено позже</h3>
+            <p>А пока готовьте по пошаговым инструкциям выше.</p>
+          </div>
+        </section>
       </div>
       <section class="comments-section" aria-labelledby="commentsTitle"><h2 id="commentsTitle">За столом обсуждают <span class="comment-count" id="commentCount"></span></h2><form class="my-4" id="commentForm"><label class="form-label" for="comment">Ваш комментарий</label><textarea class="form-control mb-3" id="comment" name="comment" rows="3" placeholder="Получилось вкусно? Поделитесь впечатлениями." required maxlength="1000"></textarea><button class="btn btn-primary" type="submit">Отправить</button></form><div id="commentList" aria-live="polite"></div></section>
     </article>
