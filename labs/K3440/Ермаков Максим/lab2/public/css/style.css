@@ -11,8 +11,9 @@
   --page: #fcfaf6;
   --paper: #ffffff;
   --ink: #2c3025;
-  --muted: #707267;
+  --muted: #626458;
   --line: #e5e5dc;
+  --control-border: #858875;
   --olive: #596b38;
   --olive-dark: #45572c;
   --soft: #edf0e4;
@@ -47,16 +48,22 @@ img { max-width: 100%; }
 .empty-note { padding: 20px 0; }
 .skip-link { position: absolute; left: 16px; top: -80px; z-index: 1100; padding: 10px 16px; background: var(--paper); border: 1px solid var(--olive); border-radius: 8px; }
 .skip-link:focus { top: 12px; }
+:is(a, button, input, select, textarea, [tabindex="0"]):focus-visible {
+  outline: 2px solid var(--olive-dark);
+  outline-offset: 3px;
+}
 
 /* Настройка стандартных элементов Bootstrap под согласованный дизайн. */
 .btn { border-radius: 8px; font-size: .875rem; padding: 10px 17px; }
+.btn-link { --bs-btn-color: var(--olive); --bs-btn-hover-color: var(--olive-dark); --bs-btn-active-color: var(--olive-dark); }
 .btn-primary { --bs-btn-bg: var(--olive); --bs-btn-border-color: var(--olive); --bs-btn-hover-bg: var(--olive-dark); --bs-btn-hover-border-color: var(--olive-dark); --bs-btn-active-bg: var(--olive-dark); --bs-btn-active-border-color: var(--olive-dark); --bs-btn-disabled-bg: var(--olive); --bs-btn-disabled-border-color: var(--olive); }
 .btn-outline-primary { --bs-btn-color: var(--olive); --bs-btn-border-color: var(--line); --bs-btn-hover-bg: var(--soft); --bs-btn-hover-color: var(--olive-dark); --bs-btn-hover-border-color: var(--olive); --bs-btn-active-bg: var(--soft); --bs-btn-active-color: var(--olive); --bs-btn-active-border-color: var(--olive); background: var(--paper); }
 .btn[aria-pressed='true'] { background: var(--soft); color: var(--olive); border-color: var(--olive); }
-.form-control, .form-select { color: var(--ink); border-color: var(--line); border-radius: 8px; padding: 11px 13px; font-size: .875rem; }
+.form-control, .form-select { color: var(--ink); border-color: var(--control-border); border-radius: 8px; padding: 11px 13px; font-size: .875rem; }
 .form-control:focus, .form-select:focus { border-color: var(--olive); box-shadow: 0 0 0 .2rem #596b3820; }
 .form-control::placeholder { color: var(--muted); }
 .form-label { font-size: .875rem; margin-bottom: 7px; }
+.form-check-input { border-color: var(--control-border); }
 .form-check-input:checked { background-color: var(--olive); border-color: var(--olive); }
 .form-check-input:focus { border-color: var(--olive); box-shadow: 0 0 0 .2rem #596b3820; }
 .modal-content { border: 1px solid var(--line); border-radius: 16px; }
@@ -80,7 +87,7 @@ img { max-width: 100%; }
 .account-links { display: flex; align-items: center; gap: 22px; margin-left: auto; font-size: .875rem; }
 .account-profile { display: flex; align-items: center; gap: 9px; color: var(--ink); }
 .logout-button { text-decoration: none; color: var(--muted); padding: 8px 0; }
-.navbar-toggler { border-color: var(--line); font-size: 1rem; padding: 8px 10px; }
+.navbar-toggler { border-color: var(--control-border); font-size: 1rem; padding: 8px 10px; }
 .site-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 5px; padding-top: 24px; padding-bottom: 25px; border-top: 1px solid var(--line); color: var(--muted); font-size: .8rem; }
 .footer-brand { font-family: 'Marck Script', Georgia, serif; font-size: 29px; color: var(--olive); }
 
@@ -90,7 +97,7 @@ img { max-width: 100%; }
 .hero h1 { margin: 19px 0; font-size: 2.85rem; line-height: 1.12; }
 .hero h1 em { color: var(--olive); }
 .hero-copy p { font-size: .9rem; }
-.search-box { display: flex; align-items: center; gap: 10px; padding: 7px 7px 7px 15px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
+.search-box { display: flex; align-items: center; gap: 10px; padding: 7px 7px 7px 15px; border: 1px solid var(--control-border); border-radius: 10px; background: var(--paper); }
 .search-box > i { color: var(--muted); }
 .search-box .form-control { border: none; background: transparent; padding: 5px 0; min-width: 0; flex: 1; }
 .search-box .form-control:focus { box-shadow: none; outline: 2px solid var(--olive); outline-offset: 3px; }
@@ -110,6 +117,7 @@ img { max-width: 100%; }
 /* Карточки рецептов, общие для каталога и личного кабинета. */
 .recipe-card { border-color: var(--line); border-radius: 14px; overflow: hidden; background: var(--paper); position: relative; }
 .recipe-photo { display: block; }
+.recipe-photo:focus-visible { outline-offset: -4px; }
 .recipe-photo img { display: block; width: 100%; height: 190px; object-fit: cover; }
 .save-icon { position: absolute; right: 12px; top: 12px; width: 34px; height: 34px; border: none; border-radius: 50%; background: var(--paper); color: var(--ink); }
 .save-icon[aria-pressed='true'] { background: var(--soft); color: var(--olive); }
@@ -201,6 +209,7 @@ img { max-width: 100%; }
 .auth-form > p { font-size: .875rem; }
 .auth-form form { margin: 27px 0 20px; }
 .auth-switch { text-align: center; font-size: .875rem; }
+.auth-switch a { text-decoration: underline; }
 
 /* Bootstrap перестраивает колонки; здесь меняются только особые блоки. */
 @media (max-width: 991px) {

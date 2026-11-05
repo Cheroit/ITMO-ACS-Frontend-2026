@@ -12,7 +12,7 @@ function renderProfile() {
   document.getElementById('publicationCount').textContent = publications.length;
   document.getElementById('followingCount').textContent = following.length;
   document.getElementById('followingList').innerHTML = following.map(cook => `
-    <div class="col-md-6"><article class="cook-card"><span class="avatar avatar-large">${escapeHTML(getInitials(cook.name))}</span><div><h3>${escapeHTML(cook.name)}</h3><p>${escapeHTML(cook.about)}</p></div><button class="btn btn-outline-primary" type="button" data-follow="${cook.id}">Вы подписаны</button></article></div>`).join('');
+    <div class="col-md-6"><article class="cook-card"><span class="avatar avatar-large" aria-hidden="true">${escapeHTML(getInitials(cook.name))}</span><div><h3>${escapeHTML(cook.name)}</h3><p>${escapeHTML(cook.about)}</p></div><button class="btn btn-outline-primary" type="button" data-follow="${cook.id}">Вы подписаны</button></article></div>`).join('');
 }
 
 async function loadProfile() {

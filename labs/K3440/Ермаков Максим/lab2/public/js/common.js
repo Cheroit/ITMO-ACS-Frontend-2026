@@ -51,11 +51,20 @@ function showPageError(error) {
   status.textContent = error.message + ' Можно обновить страницу и повторить попытку.';
 }
 
-function requireLogin() {
+function showModal(modalId, trigger) {
+  const modal = document.getElementById(modalId);
+  if (trigger) {
+    // Фокус можно вернуть, когда Bootstrap закончил скрывать окно.
+    modal.addEventListener('hidden.bs.modal', () => trigger.focus(), { once: true });
+  }
+  bootstrap.Modal.getOrCreateInstance(modal).show(trigger);
+}
+
+function requireLogin(trigger) {
   if (currentUser) return true;
   const next = location.pathname.split('/').pop() + location.search;
   document.getElementById('loginModalLink').href = 'login.html?next=' + encodeURIComponent(next);
-  bootstrap.Modal.getOrCreateInstance(document.getElementById('loginModal')).show();
+  showModal('loginModal', trigger);
   return false;
 }
 
@@ -71,7 +80,7 @@ function recipeCard(recipe) {
         <span class="recipe-type">${escapeHTML(recipe.type)}</span>
         <h3 class="recipe-title"><a href="${href}">${escapeHTML(recipe.title)}</a></h3>
         <div class="recipe-meta"><span><i class="bi bi-clock" aria-hidden="true"></i> ${recipe.time} мин</span><span><i class="bi bi-bar-chart" aria-hidden="true"></i> ${escapeHTML(recipe.difficulty)}</span></div>
-        <div class="recipe-bottom mt-auto"><span class="recipe-author"><span class="avatar avatar-small">${escapeHTML(getInitials(author.name))}</span>${escapeHTML(author.name)}</span><span><i class="bi bi-heart" aria-hidden="true"></i> <span data-likes-count="${escapeHTML(recipe.id)}">${getLikeCount(recipe)}</span></span></div>
+      <div class="recipe-bottom mt-auto"><span class="recipe-author"><span class="avatar avatar-small" aria-hidden="true">${escapeHTML(getInitials(author.name))}</span>${escapeHTML(author.name)}</span><span><i class="bi bi-heart" aria-hidden="true"></i><span class="visually-hidden">Отметок «Нравится»: </span> <span data-likes-count="${escapeHTML(recipe.id)}">${getLikeCount(recipe)}</span></span></div>
       </div>
     </article>`;
 }
@@ -86,9 +95,12 @@ function updateActionButtons() {
     button.setAttribute('aria-pressed', active);
     button.querySelector('i').className = 'bi bi-bookmark' + (active ? '-fill' : '');
     const label = button.querySelector('span');
-    if (label) label.textContent = active ? 'Рецепт сохранён' : 'Сохранить рецепт';
-    const recipe = recipes.find(item => String(item.id) === button.dataset.save);
-    button.setAttribute('aria-label', (active ? 'Убрать из сохранённых: ' : 'Сохранить рецепт: ') + recipe.title);
+    if (label) {
+      label.textContent = active ? 'Рецепт сохранён' : 'Сохранить рецепт';
+    } else {
+      const recipe = recipes.find(item => String(item.id) === button.dataset.save);
+      button.setAttribute('aria-label', (active ? 'Убрать из сохранённых: ' : 'Сохранить рецепт: ') + recipe.title);
+    }
   });
   document.querySelectorAll('[data-follow]').forEach(button => {
     const active = getUserList('following').includes(button.dataset.follow);
@@ -100,7 +112,7 @@ function updateActionButtons() {
     const active = getUserList('liked').includes(button.dataset.like);
     button.setAttribute('aria-pressed', active);
     button.querySelector('i').className = 'bi bi-heart' + (active ? '-fill' : '');
-    button.querySelector('span').textContent = getLikeCount(recipe);
+    button.querySelector('[data-like-count]').textContent = getLikeCount(recipe);
   });
   document.querySelectorAll('[data-likes-count]').forEach(element => {
     const recipe = recipes.find(item => String(item.id) === element.dataset.likesCount);
@@ -124,7 +136,7 @@ async function toggleAction(collection, field, id) {
 
 document.addEventListener('click', async event => {
   const button = event.target.closest('[data-save], [data-follow], [data-like]');
-  if (!button || button.disabled || !requireLogin()) return;
+  if (!button || button.disabled || !requireLogin(button)) return;
   button.disabled = true;
   try {
     if (button.hasAttribute('data-save')) await toggleAction('saved', 'recipeId', button.dataset.save);
@@ -141,7 +153,7 @@ document.addEventListener('click', async event => {
 
 const account = document.getElementById('accountLinks');
 if (currentUser) {
-  account.innerHTML = `<a class="account-profile" href="profile.html"><span class="avatar">${escapeHTML(getInitials(currentUser.name))}</span><span>Моя кухня</span></a><button class="btn btn-link logout-button" id="logoutButton" type="button">Выйти</button>`;
+  account.innerHTML = `<a class="account-profile" href="profile.html"><span class="avatar" aria-hidden="true">${escapeHTML(getInitials(currentUser.name))}</span><span>Моя кухня</span></a><button class="btn btn-link logout-button" id="logoutButton" type="button">Выйти</button>`;
   document.getElementById('logoutButton').addEventListener('click', () => {
     clearSession();
     location.href = 'index.html';

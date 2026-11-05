@@ -7,7 +7,7 @@ function renderComments() {
     const author = cooks.find(cook => cook.id === item.userId);
     const name = author ? author.name : 'Кулинар';
     const date = new Date(item.createdAt).toLocaleDateString('ru-RU');
-    return `<article class="comment"><span class="avatar">${escapeHTML(getInitials(name))}</span><div><h3>${escapeHTML(name)} <time datetime="${escapeHTML(item.createdAt)}">${date}</time></h3><p>${escapeHTML(item.text)}</p></div></article>`;
+    return `<article class="comment"><span class="avatar" aria-hidden="true">${escapeHTML(getInitials(name))}</span><div><h3>${escapeHTML(name)} <time datetime="${escapeHTML(item.createdAt)}">${date}</time></h3><p>${escapeHTML(item.text)}</p></div></article>`;
   }).join('') : '<p class="empty-note">Здесь пока тихо. Оставьте первый комментарий!</p>';
 }
 
@@ -53,7 +53,7 @@ async function loadRecipe() {
 
 document.getElementById('commentForm').addEventListener('submit', async function (event) {
   event.preventDefault();
-  if (!requireLogin()) return;
+  if (!requireLogin(event.submitter || this.elements.comment)) return;
   const text = this.elements.comment.value.trim();
   if (!text) return;
   const button = this.querySelector('[type="submit"]');

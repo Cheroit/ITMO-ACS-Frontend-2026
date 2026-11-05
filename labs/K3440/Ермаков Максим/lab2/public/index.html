@@ -20,11 +20,11 @@
   <a class="skip-link" href="#main">Перейти к содержимому</a>
   <header class="site-header">
     <nav class="navbar navbar-expand-lg container" aria-label="Главная навигация">
-      <a class="brand" href="index.html" aria-label="На кухне — главная">
+      <a class="brand" href="index.html">
         <span class="brand-mark"><img src="assets/images/chef-hat.svg" width="21" height="21" alt=""></span>
         <span class="brand-text"><span class="brand-word">на кухне</span><span class="brand-caption">рецепты и истории</span></span>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Открыть меню"><span class="navbar-toggler-icon"></span></button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Меню сайта"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="topNav">
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="recipes.html" data-nav="recipes">Рецепты</a></li>
@@ -35,7 +35,7 @@
     </nav>
   </header>
 
-  <main class="page-main container" id="main">
+  <main class="page-main container" id="main" tabindex="-1">
     <p class="small-note mb-4" id="pageStatus" role="status" hidden></p>
 
     <section class="hero" aria-labelledby="homeTitle">
@@ -46,14 +46,14 @@
         <form class="search-box hero-search" action="recipes.html" method="get" role="search">
           <i class="bi bi-search" aria-hidden="true"></i>
           <label class="visually-hidden" for="homeQuery">Поиск рецепта</label>
-          <input class="form-control" id="homeQuery" name="query" placeholder="Что будем готовить?" maxlength="100">
+          <input class="form-control" id="homeQuery" name="query" aria-describedby="homeSearchHint" placeholder="Что будем готовить?" maxlength="100">
           <button class="btn btn-primary" type="submit">Найти рецепт</button>
         </form>
-        <span class="hero-hint">Например: паста, завтрак или что-то к чаю</span>
+        <span class="hero-hint" id="homeSearchHint">Например: паста, завтрак или что-то к чаю</span>
       </div>
-      <a class="hero-photo" href="recipe.html?id=pasta" aria-label="Открыть рецепт пасты с томатами">
+      <a class="hero-photo" href="recipe.html?id=pasta" aria-labelledby="featuredRecipe">
         <img src="assets/images/pasta.jpg" alt="Паста с томатами и зеленью">
-        <span class="photo-caption"><span><small>РЕЦЕПТ ДНЯ</small><strong>Паста с томатами</strong></span><span class="photo-arrow"><i class="bi bi-arrow-up-right" aria-hidden="true"></i></span></span>
+        <span class="photo-caption"><span id="featuredRecipe"><small>РЕЦЕПТ ДНЯ</small><strong>Паста с томатами</strong></span><span class="photo-arrow"><i class="bi bi-arrow-up-right" aria-hidden="true"></i></span></span>
       </a>
     </section>
     <section class="section-space" aria-labelledby="featuredTitle">

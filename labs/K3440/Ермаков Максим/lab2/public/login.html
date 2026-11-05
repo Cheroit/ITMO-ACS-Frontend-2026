@@ -19,11 +19,11 @@
   <a class="skip-link" href="#main">Перейти к содержимому</a>
   <header class="site-header">
     <nav class="navbar navbar-expand-lg container" aria-label="Главная навигация">
-      <a class="brand" href="index.html" aria-label="На кухне — главная">
+      <a class="brand" href="index.html">
         <span class="brand-mark"><img src="assets/images/chef-hat.svg" width="21" height="21" alt=""></span>
         <span class="brand-text"><span class="brand-word">на кухне</span><span class="brand-caption">рецепты и истории</span></span>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Открыть меню"><span class="navbar-toggler-icon"></span></button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Меню сайта"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="topNav">
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="recipes.html" data-nav="recipes">Рецепты</a></li>
@@ -34,7 +34,7 @@
     </nav>
   </header>
 
-  <main class="page-main container" id="main">
+  <main class="page-main container" id="main" tabindex="-1">
     <p class="small-note mb-4" id="pageStatus" role="status" hidden></p>
 
     <section class="auth-layout">
@@ -45,7 +45,7 @@
           <div class="mb-3"><label class="form-label" for="email">Электронная почта</label><input class="form-control" id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" maxlength="100" required></div>
           <div class="mb-3"><label class="form-label" for="password">Пароль</label><input class="form-control" id="password" name="password" type="password" placeholder="Введите пароль" autocomplete="current-password" minlength="6" maxlength="100" required></div>
           <div class="form-check mb-4"><input class="form-check-input" id="remember" name="remember" type="checkbox"><label class="form-check-label small-note" for="remember">Запомнить меня</label></div>
-          <p class="alert alert-danger" id="authError" role="alert" hidden></p>
+          <p class="alert alert-danger" id="authError" role="alert" tabindex="-1" hidden></p>
           <button class="btn btn-primary w-100" type="submit">Войти</button>
         </form>
         <p class="auth-switch">Ещё нет аккаунта? <a id="authSwitch" href="register.html">Зарегистрироваться</a></p>
