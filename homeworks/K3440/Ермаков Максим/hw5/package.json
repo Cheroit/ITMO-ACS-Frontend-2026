@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "api": "json-server --watch db.json -m ./node_modules/json-server-auth --port 3000",
+    "start": "vite --port 8080",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
@@ -13,7 +15,10 @@
     "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
+    "axios": "^1.21.1",
+    "bootstrap": "^5.3.9",
     "pinia": "^4.0.3",
+    "pinia-persists": "^1.2.0",
     "vue": "^3.5.42",
     "vue-router": "^5.3.1"
   },
@@ -25,6 +30,8 @@
     "eslint-plugin-oxlint": "~1.82.0",
     "eslint-plugin-vue": "~10.11.0",
     "globals": "^17.12.0",
+    "json-server": "^0.17.4",
+    "json-server-auth": "^2.1.0",
     "npm-run-all2": "^9.0.3",
     "oxlint": "~1.82.0",
     "prettier": "3.9.6",
