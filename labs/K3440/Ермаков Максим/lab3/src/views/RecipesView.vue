@@ -1,6 +1,6 @@
 <script setup>
-import { reactive, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { computed, reactive, watch } from 'vue'
+import { RouterLink, useRoute, useRouter } from 'vue-router'
 import RecipeGrid from '../components/RecipeGrid.vue'
 import RequestStatus from '../components/RequestStatus.vue'
 import { useRecipes } from '../composables/useRecipes'
@@ -16,9 +16,23 @@ function readFilters() {
   ]))
 }
 
+function readPage() {
+  const value = route.query.page
+  const page = typeof value === 'string' && /^\d+$/.test(value) ? Number(value) : 1
+  return Number.isSafeInteger(page) && page > 0 ? page : 1
+}
+
 const draft = reactive(readFilters())
-watch(() => route.query, () => Object.assign(draft, readFilters()))
-const { recipes, loading, error, reload } = useRecipes(readFilters)
+watch(fields.map(name => () => route.query[name]), () => Object.assign(draft, readFilters()))
+const { data, recipes, loading, error, reload } = useRecipes(() => ({
+  ...readFilters(),
+  page: readPage(),
+}))
+const pageCount = computed(() => data.value ? Math.ceil(data.value.total / data.value.pageSize) : 0)
+
+function pageLink(page) {
+  return { name: 'recipes', query: { ...route.query, page: page > 1 ? String(page) : undefined } }
+}
 
 function search() {
   const query = Object.fromEntries(fields.map(name => [name, draft[name].trim() || undefined]))
@@ -78,8 +92,19 @@ function reset() {
       <section class="col-lg-9" aria-labelledby="resultsTitle">
         <h2 id="resultsTitle" class="visually-hidden">Найденные рецепты</h2>
         <RequestStatus :loading="loading" :error="error" @retry="reload" />
-        <template v-if="!loading && !error">
-          <p class="result-heading" role="status">Найдено рецептов: {{ recipes.length }}</p>
+        <template v-if="data && !loading && !error">
+          <div class="d-flex flex-wrap align-items-baseline justify-content-between gap-2 mb-3">
+            <p class="result-heading mb-0" role="status">Найдено рецептов: {{ data.total }}</p>
+            <nav v-if="pageCount > 1" class="d-flex flex-wrap align-items-center gap-2" aria-label="Страницы каталога">
+              <RouterLink v-if="data.page > 1" class="btn btn-sm btn-outline-primary" :to="pageLink(data.page - 1)">
+                Назад
+              </RouterLink>
+              <span class="small-note">Страница {{ data.page }} из {{ pageCount }}</span>
+              <RouterLink v-if="data.page < pageCount" class="btn btn-sm btn-outline-primary" :to="pageLink(data.page + 1)">
+                Далее
+              </RouterLink>
+            </nav>
+          </div>
           <RecipeGrid v-if="recipes.length" :recipes="recipes" two-columns />
           <div v-else class="empty-state">
             <h3>Рецептов пока нет</h3><p>Попробуйте изменить запрос или сбросить фильтры.</p>

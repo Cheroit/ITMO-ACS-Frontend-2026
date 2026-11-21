@@ -3,6 +3,7 @@ const auth = require('json-server-auth');
 const fs = require('node:fs');
 const path = require('node:path');
 const { randomUUID } = require('node:crypto');
+const { getCatalogPage } = require('./catalog.cjs');
 
 // Начальная база копируется только при первом запуске. Дальше JSON Server
 // сохраняет регистрации и действия пользователей в db.json.
@@ -24,6 +25,12 @@ server.get('/api/authors', (req, res) => {
     about: user.about || 'Делится домашними рецептами'
   }));
   res.json(authors);
+});
+
+server.get('/api/catalog', (req, res) => {
+  const result = getCatalogPage(server.db.get('recipes').value(), req.query);
+  if (!result) return res.status(400).json('Некорректные параметры поиска.');
+  res.json(result);
 });
 
 // Открываем только нужные приложению маршруты. Служебный /db и прямой
